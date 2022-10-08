@@ -93,6 +93,7 @@ class Cat:
         self.gender = gender
         self.current_place = current_place
         self.places_been = [Home]
+        self.miles = 0
         self.leash = False
         print("Welcome to the World {}!".format(self.name))
     def __repr__(self):
@@ -115,12 +116,20 @@ class Cat:
         else:
             self.energy = 20
             print("Yum! Your energy levels are {}/20".format(self.energy))
-print("Choose a gender: F or M or Other")
-gender = input()
-gender_phrase = {"M":"handsome boy", "F":"pretty girl", "Other":"gorgeous thing"}
-print("Meow! What are your owners going to call you, you {}?".format(gender_phrase[gender]))
-Bubbles = Cat(input(), gender, Home)
-print("That car journey home really drained your energy!")
+    def walk(self):
+        if self.energy < 2:
+            print("You need to eat something!")
+        else:
+            Bubbles.miles += 1
+            Bubbles.energy += -2
+            print("You have walked {}= out of 9 miles".format(Bubbles.miles))
+
+#print("Choose a gender: F or M or Other")
+#gender = input()
+#gender_phrase = {"M":"handsome boy", "F":"pretty girl", "Other":"gorgeous thing"}
+#print("Meow! What are your owners going to call you, you {}?".format(gender_phrase[gender]))
+#Bubbles = Cat(input(), gender, Home)
+#print("That car journey home really drained your energy!")
 intro = False
 while intro:
     intro_eat = True
@@ -175,6 +184,14 @@ while intro:
         print("type \"help\" at any point to get instructions")
         intro = False
 doing_stuff = True
+#for sake of speed:
+Bubbles = Cat("Bubbles", "M", Home)
+Bubbles.items.append("Leash")
+Bubbles.items.append("Jacket")
+Bubbles.currently_wearing.append("Leash")
+Bubbles.currently_wearing.append("Jacket")
+Bubbles.leash = True
+Bubbles.XP = 20
 while doing_stuff:
     doing = input()
     if doing == "eat":
@@ -281,12 +298,34 @@ while doing_stuff:
                 in_Van = True
                 while in_Van:
                     print("They don't like you looking around here too much!")
-                    print("Is that da's *1000 down himilayan North Face jacket!?")
+                    print("*Takes da's 1000 down himilayan North Face jacket*")
                     Bubbles.items.append("Jacket")
                     in_Van = False
                     exploring = False
             if Bubbles.current_place == Snowdon:
-                pass
+                at_Snowdon = True
+                while at_Snowdon:
+                    print("Wow that's a 9 mile \"walk\"")
+                    if "Jacket" in Bubbles.currently_wearing:
+                        Jacket = True
+                        print("Good thing you are wearing your jacket! Lets get going")
+                        print("Lets get \"walk\"ing, or \"eat\" something")
+                        while Bubbles.miles <= 9:
+                            start_walking = input()
+                            if start_walking == "walk":
+                                if Bubbles.miles < 9:
+                                    Bubbles.walk()
+                                if Bubbles.miles == 9:
+                                    print("Wow! What a view!!")
+                                    Bubbles.XP += 5
+                                    print("You have {xp}".format(xp=Bubbles.XP))
+                                    at_Snowdon = False
+                            elif start_walking == "eat":
+                                Bubbles.eat()
+                            else:
+                                print("Not quite")
+                    else:
+                        print("You'll need to be wearing something warm to go up there!")
             if Bubbles.current_place == Bournemouth:
                 pass
             if Bubbles.current_place == Forest:
@@ -339,5 +378,7 @@ while doing_stuff:
 #continue with story
 #add text for if already done story line 
 #have to go past home to go elsewhere
-
-#add explore_van
+#have to go back in van to get home still
+#go up snowdon
+#add beach count
+#add no_energy, road trip if already at van

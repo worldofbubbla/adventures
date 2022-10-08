@@ -194,6 +194,7 @@ doing_stuff = True
 Bubbles = Cat("Bubbles", "M", Home)
 Bubbles.items.append("Leash")
 Bubbles.items.append("Jacket")
+Bubbles.items.append("Trunks")
 Bubbles.currently_wearing.append("Leash")
 Bubbles.currently_wearing.append("Jacket")
 Bubbles.leash = True
@@ -243,7 +244,6 @@ while doing_stuff:
                 going = False
             else:
                 print("Try again. Check places with \"locations\" or \"stay\" where you are.")
-            print(Bubbles.beach_count)
     elif doing == "explore":
         exploring = True
         while exploring:
@@ -324,6 +324,8 @@ while doing_stuff:
                                     Bubbles.walk()
                                 if Bubbles.miles == 9:
                                     print("Wow! What a view!!")
+                                    print("Someone left their... swimming trunks up here??")
+                                    Bubbles.items.append("Trunks")
                                     Bubbles.XP += 5
                                     print("You have {xp}XP".format(xp=Bubbles.XP))
                                     at_Snowdon = False
@@ -334,11 +336,40 @@ while doing_stuff:
                     else:
                         print("You'll need to be wearing something warm to go up there!")
             if Bubbles.current_place == Bournemouth:
-                pass
+                at_Bournemouth = True
+                while at_Bournemouth:
+                    if Bubbles.beach_count < 2:
+                        print("It's your first time at the beach! The sand is too scary to leave the bag!")
+                    else:
+                        if "Trunks" in Bubbles.currently_wearing:
+                            print("The water looks lovely! Lets go for a \"swim\"")
+                            swim = input()
+                            if swim == "swim" and Bubbles.energy >= 5:
+                                print("You're a better swimmer than your ma! You reached the bouy!")
+                                Bubbles.energy += -5
+                                Bubbles.XP += 5
+                                print("You have {}/20 energy".format(Bubbles.energy))
+                                print("You have {xp}XP".format(xp=Bubbles.XP))
+                                at_Bournemouth = False
+                                exploring = False
+                            elif swim == "swim" and Bubbles.energy < 5:
+                                print("You won't be able to get far with {}/20 energy".format(Bubbles.energy))
+                                at_Bournemouth = False
+                                exploring = False
+                        else:
+                            print("You can't swim without a pair of trunks!")
+                            at_Bournemouth = False
+                            exploring = False
+                    at_Bournemouth = False
             if Bubbles.current_place == Forest:
                 pass
             if Bubbles.current_place == Widemouth:
-                pass
+                at_Widemouth = True
+                while at_Widemouth:
+                    if Bubbles.beach_count < 2:
+                        print("It's your first time at the beach! The sand is too scary to leave the bag!")
+                        at_Widemouth = False
+                        exploring = False
             if Bubbles.current_place == Pistyll:
                 pass
     elif doing == "wear":
@@ -350,7 +381,7 @@ while doing_stuff:
                 print("You don't own that!")
             else:
                 if what_item in Bubbles.currently_wearing:
-                    Bubbles.currently_wearing.pop(what_item)
+                    Bubbles.currently_wearing.remove(what_item)
                     if what_item == "Leash":
                         Bubbles.leash = False
                     else:
@@ -383,8 +414,8 @@ while doing_stuff:
         
 #add text to returns
 #continue with story
-#add text for if already done story line 
+#add text for if already done story line - add booleon for visits, if true - text saying already been here/done this
 #have to go past home to go elsewhere
 #have to go back in van to get home still
-#add beach count
-#add no_energy, road trip if already at van
+#add no_energy for go, remove van to van if already at van
+#add

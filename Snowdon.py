@@ -48,17 +48,20 @@ class Place:
         self.company = company
         Place.locations.append(self.short_name)
     def go_to(self):
-        if Bubbles.leash == True:
-            Bubbles.current_place = self
-            Bubbles.energy += -2
-            if self not in Bubbles.places_been:
-                (Bubbles.places_been).append(self)
-                Bubbles.XP += 2
-            else:
-                pass
-            print("You are now at {}".format(self.name))
+        if self == Bubbles.current_place:
+            print("You are already at {}".format(self.name))
         else:
-            print("You don't have a leash! You can't go there yet. Have a look around")       
+            if Bubbles.leash == True:
+                Bubbles.current_place = self
+                Bubbles.energy += -2
+                if self not in Bubbles.places_been:
+                    (Bubbles.places_been).append(self)
+                    Bubbles.XP += 2
+                    print("You are now at {}".format(self.name))
+                else:
+                    pass
+            else:
+                print("You don't have a leash! You can't go there yet. Have a look around")       
 #Create Place instances
 Snowdon = Place("Snowdon Mountain", "Snowdon", "Mountain", ["Ma", "Da"])
 Bournemouth = Place("Bournemouth beach", "Bournemouth", "Beach", ["Ma", "Da", "Cait", "Colleen"])
@@ -202,6 +205,7 @@ while doing_stuff:
                         print("My eyes! They sting! Let's try somewhere else")
                     elif go_home == "kitchen":
                         print("Food! and a leash! Nice.")
+                        Bubbles.eat()
                         print("Let's try the Garden again")
                         Bubbles.leash = True
                         at_Home= False
@@ -228,6 +232,7 @@ while doing_stuff:
                                 print("You have {}/20 energy".format(Bubbles.energy))
                                 patio = False
                                 at_Garden = False
+                                exploring = False
                             elif fight_sniff == "sniff":
                                 Bubbles.energy += -2
                                 Bubbles.XP += +5
@@ -237,9 +242,11 @@ while doing_stuff:
                                 print("You have {}/20 energy".format(Bubbles.energy))
                                 patio = False
                                 at_Garden = False
+                                exploring = False
                             else:
                                 print("Not quite")
-                    at_Garden = False
+                        at_Garden = False
+                        exploring = False
     elif doing == "energy":
         print("You have {}/20 energy".format(Bubbles.energy))
     elif doing == "where":
@@ -253,8 +260,9 @@ while doing_stuff:
         
 #add text to returns
 #continue with story
-    #do not let Bubbles go anywhere other than garden with <7 XP
+    #do not let Bubbles go anywhere other than garden with <7 XP - add at go level
 #make sure garden finishes after fight and grass as with home
 #do not let bubbles go current place when already at current place
-
+#if go (current) - already there!
+#allow home without leash
 

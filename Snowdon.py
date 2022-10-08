@@ -388,7 +388,7 @@ while doing_stuff:
                         pass
                     print("You've taken it off")
                 else:
-                    if len(Bubbles.currently_wearing) > 2:
+                    if len(Bubbles.currently_wearing) >= 2:
                         print("You can only wear two items at a time, take something off to put this on")
                     else:
                         Bubbles.currently_wearing.append(what_item)

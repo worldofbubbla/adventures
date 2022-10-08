@@ -184,7 +184,16 @@ while doing_stuff:
             if go_where == "locations":
                 print(Place.locations)
             elif go_where in Place.locations:
-                (globals()[go_where]).go_to()
+                if go_where != "Garden" and go_where != "Home":
+                    if Bubbles.leash == False:
+                        (globals()[go_where]).go_to()
+                    else:
+                        if Bubbles.XP < 7:
+                            print("You need at least 7XP to leave KM Way!")
+                        else:
+                            (globals()[go_where]).go_to()
+                else:
+                    (globals()[go_where]).go_to()
                 going = False
             elif go_where == "stay":
                 print("Ain't going nowhere")
@@ -261,8 +270,6 @@ while doing_stuff:
 #add text to returns
 #continue with story
     #do not let Bubbles go anywhere other than garden with <7 XP - add at go level
-#make sure garden finishes after fight and grass as with home
-#do not let bubbles go current place when already at current place
 #if go (current) - already there!
 #allow home without leash
 

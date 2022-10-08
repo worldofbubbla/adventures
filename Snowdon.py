@@ -54,6 +54,10 @@ class Place:
         else:
             if Bubbles.leash == True:
                 Bubbles.current_place = self
+                if self.terrain == "Beach":
+                    Bubbles.beach_count += 1
+                else:
+                    pass
                 Bubbles.energy += -2
                 if self not in Bubbles.places_been:
                     (Bubbles.places_been).append(self)
@@ -94,6 +98,7 @@ class Cat:
         self.current_place = current_place
         self.places_been = [Home]
         self.miles = 0
+        self.beach_count = 0 
         self.leash = False
         print("Welcome to the World {}!".format(self.name))
     def __repr__(self):
@@ -116,6 +121,7 @@ class Cat:
         else:
             self.energy = 20
             print("Yum! Your energy levels are {}/20".format(self.energy))
+    #Snowdon walk function
     def walk(self):
         if self.energy < 2:
             print("You need to eat something!")
@@ -237,6 +243,7 @@ while doing_stuff:
                 going = False
             else:
                 print("Try again. Check places with \"locations\" or \"stay\" where you are.")
+            print(Bubbles.beach_count)
     elif doing == "explore":
         exploring = True
         while exploring:
@@ -318,7 +325,7 @@ while doing_stuff:
                                 if Bubbles.miles == 9:
                                     print("Wow! What a view!!")
                                     Bubbles.XP += 5
-                                    print("You have {xp}".format(xp=Bubbles.XP))
+                                    print("You have {xp}XP".format(xp=Bubbles.XP))
                                     at_Snowdon = False
                             elif start_walking == "eat":
                                 Bubbles.eat()
@@ -366,7 +373,7 @@ while doing_stuff:
     elif doing == "where":
         print("You are currently at {}".format((Bubbles.current_place).name))
     elif doing == "xp":
-        print("You have {xp}".format(xp=Bubbles.XP))
+        print("You have {xp}XP".format(xp=Bubbles.XP))
     elif doing == "items":
         print(Bubbles.items)
         print("Type \"wear\" to put on or take off items")
@@ -379,6 +386,5 @@ while doing_stuff:
 #add text for if already done story line 
 #have to go past home to go elsewhere
 #have to go back in van to get home still
-#go up snowdon
 #add beach count
 #add no_energy, road trip if already at van

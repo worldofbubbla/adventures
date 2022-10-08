@@ -57,9 +57,9 @@ class Place:
                 if self not in Bubbles.places_been:
                     (Bubbles.places_been).append(self)
                     Bubbles.XP += 2
-                    print("You are now at {}".format(self.name))
                 else:
                     pass
+                print("You are now at {}".format(self.name))
             else:
                 print("You don't have a leash! You can't go there yet. Have a look around")       
 #Create Place instances
@@ -191,7 +191,37 @@ while doing_stuff:
                         if Bubbles.XP < 7:
                             print("You need at least 7XP to leave KM Way!")
                         else:
-                            (globals()[go_where]).go_to()
+                            if Bubbles.current_place != Van:
+                                if go_where == "Van":
+                                    (globals()[go_where]).go_to()
+                                    going = False
+                                elif Bubbles.current_place == Home and go_where == "Garden":
+                                    (globals()[go_where]).go_to()
+                                    going = False
+                                elif Bubbles.current_place == Garden and go_where == "Home":
+                                    (globals()[go_where]).go_to()
+                                    going = False
+                                else:
+                                    print("You need to get there somehow!")
+                            else:
+                                print("Road trip...")
+                                (globals()[go_where]).go_to()
+                                going = False
+                                #else:
+                                #print("You need to get there somehow!")
+                                #going = False
+                            #else:
+                                #(globals()[go_where]).go_to()
+                                #going = False
+                            #if Bubbles.current_place == "Garden" and Bubbles.current_place == "Home":
+                             #   if go_where == "Van":
+                              #      (globals()[go_where]).go_to()
+                               #     going = False
+                                #else:
+                                 #   print("You need to get there somehow!")
+                            #elif Bubbles.current_place == "Van":
+                             #   (globals()[go_where]).go_to()
+                              #  going = False
                 else:
                     (globals()[go_where]).go_to()
                 going = False
@@ -256,6 +286,19 @@ while doing_stuff:
                                 print("Not quite")
                         at_Garden = False
                         exploring = False
+            if Bubbles.current_place == Van:
+                pass
+            if Bubbles.current_place == Snowdon:
+                pass
+            if Bubbles.current_place == Bournemouth:
+                pass
+            if Bubbles.current_place == Forest:
+                pass
+            if Bubbles.current_place == Widemouth:
+                pass
+            if Bubbles.current_place == Pistyll:
+                pass
+
     elif doing == "energy":
         print("You have {}/20 energy".format(Bubbles.energy))
     elif doing == "where":
@@ -269,7 +312,6 @@ while doing_stuff:
         
 #add text to returns
 #continue with story
-    #do not let Bubbles go anywhere other than garden with <7 XP - add at go level
-#if go (current) - already there!
-#allow home without leash
-
+#add text for if already done story line 
+#have to go through van to leave home
+#have to go past home to go elsewhere

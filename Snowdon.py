@@ -37,6 +37,7 @@ def help_list():
     energy - 
     where - 
     xp -
+    items - 
     """)
 
 class Place:
@@ -61,7 +62,10 @@ class Place:
                     pass
                 print("You are now at {}".format(self.name))
             else:
-                print("You don't have a leash! You can't go there yet. Have a look around")       
+                if "Leash" not in Bubbles.items:
+                    print("You don't have a leash! You can't go there yet. Have a look around")       
+                else:
+                    print("You can't go out without your leash on")
 #Create Place instances
 Snowdon = Place("Snowdon Mountain", "Snowdon", "Mountain", ["Ma", "Da"])
 Bournemouth = Place("Bournemouth beach", "Bournemouth", "Beach", ["Ma", "Da", "Cait", "Colleen"])
@@ -85,6 +89,7 @@ class Cat:
         self.XP = 2
         self.max_XP: 50
         self.items = []
+        self.currently_wearing = [] 
         self.gender = gender
         self.current_place = current_place
         self.places_been = [Home]
@@ -207,21 +212,6 @@ while doing_stuff:
                                 print("Road trip...")
                                 (globals()[go_where]).go_to()
                                 going = False
-                                #else:
-                                #print("You need to get there somehow!")
-                                #going = False
-                            #else:
-                                #(globals()[go_where]).go_to()
-                                #going = False
-                            #if Bubbles.current_place == "Garden" and Bubbles.current_place == "Home":
-                             #   if go_where == "Van":
-                              #      (globals()[go_where]).go_to()
-                               #     going = False
-                                #else:
-                                 #   print("You need to get there somehow!")
-                            #elif Bubbles.current_place == "Van":
-                             #   (globals()[go_where]).go_to()
-                              #  going = False
                 else:
                     (globals()[go_where]).go_to()
                 going = False
@@ -245,8 +235,9 @@ while doing_stuff:
                     elif go_home == "kitchen":
                         print("Food! and a leash! Nice.")
                         Bubbles.eat()
+                        Bubbles.items.append("Leash")
                         print("Let's try the Garden again")
-                        Bubbles.leash = True
+                        #Bubbles.leash = True
                         at_Home= False
                         exploring = False
                     else: 
@@ -287,7 +278,13 @@ while doing_stuff:
                         at_Garden = False
                         exploring = False
             if Bubbles.current_place == Van:
-                pass
+                in_Van = True
+                while in_Van:
+                    print("They don't like you looking around here too much!")
+                    print("Is that da's *1000 down himilayan North Face jacket!?")
+                    Bubbles.items.append("Jacket")
+                    in_Van = False
+                    exploring = False
             if Bubbles.current_place == Snowdon:
                 pass
             if Bubbles.current_place == Bournemouth:
@@ -298,6 +295,32 @@ while doing_stuff:
                 pass
             if Bubbles.current_place == Pistyll:
                 pass
+    elif doing == "wear":
+        wearing = True
+        while wearing:
+            print("What item?")
+            what_item = input()
+            if what_item not in Bubbles.items:
+                print("You don't own that!")
+            else:
+                if what_item in Bubbles.currently_wearing:
+                    Bubbles.currently_wearing.pop(what_item)
+                    if what_item == "Leash":
+                        Bubbles.leash = False
+                    else:
+                        pass
+                    print("You've taken it off")
+                else:
+                    if len(Bubbles.currently_wearing) > 2:
+                        print("You can only wear two items at a time, take something off to put this on")
+                    else:
+                        Bubbles.currently_wearing.append(what_item)
+                        if what_item == "Leash":
+                            Bubbles.leash = True
+                        else:
+                            pass
+                        print("That looks good on you!")
+            wearing = False
 
     elif doing == "energy":
         print("You have {}/20 energy".format(Bubbles.energy))
@@ -305,7 +328,9 @@ while doing_stuff:
         print("You are currently at {}".format((Bubbles.current_place).name))
     elif doing == "xp":
         print("You have {xp}".format(xp=Bubbles.XP))
-    
+    elif doing == "items":
+        print(Bubbles.items)
+        print("Type \"wear\" to put on or take off items")
     elif doing == "help":
         help_list()
 
@@ -313,5 +338,6 @@ while doing_stuff:
 #add text to returns
 #continue with story
 #add text for if already done story line 
-#have to go through van to leave home
 #have to go past home to go elsewhere
+
+#add explore_van

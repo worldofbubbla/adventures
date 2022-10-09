@@ -69,11 +69,10 @@ class Place:
                 if "Leash" not in Bubbles.items:
                     print("You don't have a leash! You can't go there yet. Have a look around")       
                 else:
-                    print("You can't go out without your leash on")
+                    print("You can't change location without your leash on")
 #Create Place instances
 Snowdon = Place("Snowdon Mountain", "Snowdon", "Mountain", ["Ma", "Da"])
 Bournemouth = Place("Bournemouth beach", "Bournemouth", "Beach", ["Ma", "Da", "Cait", "Colleen"])
-Forest = Place("the Forest of Dean", "Forest", "Forest", ["Ma", "Da"])
 Widemouth = Place("Widemouth Beach", "Widemouth", "Beach", ["Ma", "Da", "George"])
 Pistyll = Place("Pistyll Waterfall", "Pistyll", "Waterfall", ["Ma", "Da"])
 Van = Place("the Van", "Van", "inside", [])
@@ -100,6 +99,8 @@ class Cat:
         self.miles = 0
         self.beach_count = 0 
         self.leash = False
+        self.swimmer = False
+        self.trunks_wet = False
         print("Welcome to the World {}!".format(self.name))
     def __repr__(self):
         return "You are {name} the Cat, you have {energy} energy and and {XP}XP".format(name=self.name, energy=self.energy, XP=self.XP)
@@ -130,6 +131,40 @@ class Cat:
             Bubbles.energy += -2
             print("You have walked {}= out of 9 miles".format(Bubbles.miles))
 
+def going():
+            print("Go where?")
+            go_where = input()
+            if go_where == "locations":
+                print(Place.locations)
+            elif go_where in Place.locations:
+                if go_where != "Garden" and go_where != "Home":
+                    if Bubbles.leash == False:
+                        (globals()[go_where]).go_to()
+                    else:
+                        if Bubbles.XP < 7:
+                            print("You need at least 7XP to leave KM Way!")
+                        else:
+                            if Bubbles.current_place != Van:
+                                if go_where == "Van":
+                                    if Bubbles.trunks_wet == False:
+                                        (globals()[go_where]).go_to()
+                                    else:
+                                        print("You can't get in there with wet trunks - take them off")
+                                elif Bubbles.current_place == Home and go_where == "Garden":
+                                    (globals()[go_where]).go_to()
+                                elif Bubbles.current_place == Garden and go_where == "Home":
+                                    (globals()[go_where]).go_to()
+                                else:
+                                    print("You need to get there somehow!")
+                            else:
+                                print("Road trip...")
+                                (globals()[go_where]).go_to()
+                else:
+                    (globals()[go_where]).go_to()
+            elif go_where == "stay":
+                print("Ain't going nowhere")
+            else:
+                print("Try again. Check places with \"locations\" or \"stay\" where you are.")
 #print("Choose a gender: F or M or Other")
 #gender = input()
 #gender_phrase = {"M":"handsome boy", "F":"pretty girl", "Other":"gorgeous thing"}
@@ -206,44 +241,49 @@ while doing_stuff:
     elif doing == "sleep":
         Bubbles.sleep()
     elif doing == "go":
-        going = True
-        while going:
-            print("Go where?")
-            go_where = input()
-            if go_where == "locations":
-                print(Place.locations)
-            elif go_where in Place.locations:
-                if go_where != "Garden" and go_where != "Home":
-                    if Bubbles.leash == False:
-                        (globals()[go_where]).go_to()
-                    else:
-                        if Bubbles.XP < 7:
-                            print("You need at least 7XP to leave KM Way!")
-                        else:
-                            if Bubbles.current_place != Van:
-                                if go_where == "Van":
-                                    (globals()[go_where]).go_to()
-                                    going = False
-                                elif Bubbles.current_place == Home and go_where == "Garden":
-                                    (globals()[go_where]).go_to()
-                                    going = False
-                                elif Bubbles.current_place == Garden and go_where == "Home":
-                                    (globals()[go_where]).go_to()
-                                    going = False
-                                else:
-                                    print("You need to get there somehow!")
-                            else:
-                                print("Road trip...")
-                                (globals()[go_where]).go_to()
-                                going = False
-                else:
-                    (globals()[go_where]).go_to()
-                going = False
-            elif go_where == "stay":
-                print("Ain't going nowhere")
-                going = False
-            else:
-                print("Try again. Check places with \"locations\" or \"stay\" where you are.")
+        going()
+        #going = True
+        #while going:
+         #   print("Go where?")
+          #  go_where = input()
+           # if go_where == "locations":
+            #    print(Place.locations)
+            #elif go_where in Place.locations:
+             #   if go_where != "Garden" and go_where != "Home":
+              #      if Bubbles.leash == False:
+               #         (globals()[go_where]).go_to()
+                #    else:
+                 #       if Bubbles.XP < 7:
+                  #          print("You need at least 7XP to leave KM Way!")
+                   #     else:
+                    #        if Bubbles.current_place != Van:
+                     #           if go_where == "Van":
+                      #              if Bubbles.trunks_wet == False:
+                       #                 (globals()[go_where]).go_to()
+                        #                going = False
+                         #           else:
+                          #              print("You can't get in there with wet trunks - take them off")
+                           #             going = False
+                            #    elif Bubbles.current_place == Home and go_where == "Garden":
+                             #       (globals()[go_where]).go_to()
+                              #      going = False
+                               # elif Bubbles.current_place == Garden and go_where == "Home":
+                                #    (globals()[go_where]).go_to()
+                                 #   going = False
+                               # else:
+                                #    print("You need to get there somehow!")
+                          #  else:
+                           #     print("Road trip...")
+                            #    (globals()[go_where]).go_to()
+                             #   going = False
+               # else:
+                #    (globals()[go_where]).go_to()
+               # going = False
+          #  elif go_where == "stay":
+           #     print("Ain't going nowhere")
+            #    going = False
+           # else:
+            #    print("Try again. Check places with \"locations\" or \"stay\" where you are.")
     elif doing == "explore":
         exploring = True
         while exploring:
@@ -340,6 +380,8 @@ while doing_stuff:
                 while at_Bournemouth:
                     if Bubbles.beach_count < 2:
                         print("It's your first time at the beach! The sand is too scary to leave the bag!")
+                        at_Bournemouth = False
+                        exploring = False
                     else:
                         if "Trunks" in Bubbles.currently_wearing:
                             print("The water looks lovely! Lets go for a \"swim\"")
@@ -348,6 +390,8 @@ while doing_stuff:
                                 print("You're a better swimmer than your ma! You reached the bouy!")
                                 Bubbles.energy += -5
                                 Bubbles.XP += 5
+                                Bubbles.swimmer = True
+                                Bubbles.trunks_wet = True
                                 print("You have {}/20 energy".format(Bubbles.energy))
                                 print("You have {xp}XP".format(xp=Bubbles.XP))
                                 at_Bournemouth = False
@@ -361,8 +405,6 @@ while doing_stuff:
                             at_Bournemouth = False
                             exploring = False
                     at_Bournemouth = False
-            if Bubbles.current_place == Forest:
-                pass
             if Bubbles.current_place == Widemouth:
                 at_Widemouth = True
                 while at_Widemouth:
@@ -370,7 +412,45 @@ while doing_stuff:
                         print("It's your first time at the beach! The sand is too scary to leave the bag!")
                         at_Widemouth = False
                         exploring = False
+                    else:
+                        print("You are a lot more confident on the sand this time!")
+                        print("A ratty looking dog runs up to you!")
+                        if Bubbles.XP > 20:
+                            print("Me-ow! You showed him who's boss!")
+                            print("Now \"climb\" on that rock to assert your dominance!")
+                            climb_rock = input()
+                            if climb_rock == "climb":
+                                print("ItS tHe CiRcLe Of LiFe!!")
+                                Bubbles.XP += 5
+                                print(("You have {xp}XP".format(xp=Bubbles.XP)))
+                                at_Widemouth = False
+                                exploring = False
             if Bubbles.current_place == Pistyll:
+                at_Pistyll = True
+                while at_Pistyll:
+                    print("It's so high up here! But you're stuck on one side of the river")
+                    print("You can \"swim\" to the other side for a better view!")
+                    go_swim = input()
+                    if go_swim == "swim":
+                        if Bubbles.swimmer == False:
+                            print("You should probably practice swimming somewhere else first")
+                            at_Pistyll = False
+                            exploring = False
+                        else:
+                            if "Trunks" in Bubbles.currently_wearing:
+                                print("Good thing you've got your trunks on!")
+                                print("Splash splash")
+                                print("What a beautiful sight")
+                                at_Pistyll = False
+                                exploring = False
+                            else:
+                                print("You need your trunks!")
+                                at_Pistyll = False
+                                exploring = False
+                    else:
+                        print("Not quite")
+                        at_Pistyll = False
+                        exploring = False
                 pass
     elif doing == "wear":
         wearing = True
@@ -384,6 +464,8 @@ while doing_stuff:
                     Bubbles.currently_wearing.remove(what_item)
                     if what_item == "Leash":
                         Bubbles.leash = False
+                    if what_item == "Trunks":
+                        Bubbles.trunks_wet = False
                     else:
                         pass
                     print("You've taken it off")
@@ -418,4 +500,4 @@ while doing_stuff:
 #have to go past home to go elsewhere
 #have to go back in van to get home still
 #add no_energy for go, remove van to van if already at van
-#add
+#double check the XP for fighting at widemouth is realistic

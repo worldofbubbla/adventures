@@ -52,24 +52,27 @@ class Place:
         if self == Bubbles.current_place:
             print("You are already at {}".format(self.name))
         else:
-            if Bubbles.leash == True:
-                Bubbles.current_place = self
-                if self.terrain == "Beach":
-                    Bubbles.beach_count += 1
-                else:
-                    pass
-                Bubbles.energy += -2
-                if self not in Bubbles.places_been:
-                    (Bubbles.places_been).append(self)
-                    Bubbles.XP += 2
-                else:
-                    pass
-                print("You are now at {}".format(self.name))
+            if Bubbles.energy < 2:
+                print("You don't have enough energy to go anywhere right now")
             else:
-                if "Leash" not in Bubbles.items:
-                    print("You don't have a leash! You can't go there yet. Have a look around")       
+                if Bubbles.leash == True:
+                    Bubbles.current_place = self
+                    if self.terrain == "Beach":
+                        Bubbles.beach_count += 1
+                    else:
+                        pass
+                    Bubbles.energy += -2
+                    if self not in Bubbles.places_been:
+                        (Bubbles.places_been).append(self)
+                        Bubbles.XP += 2
+                    else:
+                        pass
+                    print("You are now at {}".format(self.name))
                 else:
-                    print("You can't change location without your leash on")
+                    if "Leash" not in Bubbles.items:
+                        print("You don't have a leash! You can't go there yet. Have a look around")       
+                    else:
+                        print("You can't change location without your leash on")
 #Create Place instances
 Snowdon = Place("Snowdon Mountain", "Snowdon", "Mountain", ["Ma", "Da"])
 Bournemouth = Place("Bournemouth beach", "Bournemouth", "Beach", ["Ma", "Da", "Cait", "Colleen"])
@@ -386,12 +389,21 @@ def wearing():
                             pass
                         print("That looks good on you!")
             wearing = False
-#print("Choose a gender: F or M or Other")
-#gender = input()
-#gender_phrase = {"M":"handsome boy", "F":"pretty girl", "Other":"gorgeous thing"}
-#print("Meow! What are your owners going to call you, you {}?".format(gender_phrase[gender]))
-#Bubbles = Cat(input(), gender, Home)
-#print("That car journey home really drained your energy!")
+
+print("Choose a gender: F or M or Other")
+
+gendering = True
+while gendering:
+    gender = input()
+    gender_phrase = {"M":"handsome boy", "F":"pretty girl", "Other":"gorgeous thing"}
+    if gender in gender_phrase.keys():
+        print("Meow! What are your owners going to call you, you {}?".format(gender_phrase[gender]))
+        Bubbles = Cat(input(), gender, Home)
+        gendering = False
+    else:
+        print("Please select from the available options")
+
+print("That car journey home really drained your energy!")
 intro = False
 while intro:
     intro_eat = True
@@ -447,7 +459,7 @@ while intro:
         intro = False
 doing_stuff = True
 #for sake of speed:
-Bubbles = Cat("Bubbles", "M", Home)
+#Bubbles = Cat("Bubbles", "M", Home)
 Bubbles.items.append("Leash")
 Bubbles.items.append("Jacket")
 Bubbles.items.append("Trunks")
@@ -484,11 +496,7 @@ while doing_stuff:
             help_list()
 
         
-#add text to returns
-#continue with story
-#add text for if already done story line - add booleon for visits, if true - text saying already been here/done this
-#have to go past home to go elsewhere
-#have to go back in van to get home still
-#add no_energy for go
 #double check the XP for fighting at widemouth is realistic
 #add winner text
+#help list better
+#clean up intro

@@ -333,27 +333,31 @@ def explore():
                             print("You're already the Lion King")
                             at_Widemouth = False
             if Bubbles.current_place == Pistyll:
-                at_Pistyll = True
-                while at_Pistyll:
-                    print("It's so high up here! But you're stuck on one side of the river")
-                    print("You can \"swim\" to the other side for a better view!")
-                    go_swim = input()
-                    if go_swim == "swim":
-                        if Bubbles.swimmer == False:
-                            print("You should probably practice swimming somewhere else first")
-                            at_Pistyll = False
-                        else:
-                            if "Trunks" in Bubbles.currently_wearing:
-                                print("Good thing you've got your trunks on!")
-                                print("Splash splash")
-                                print("What a beautiful sight")
+                if Bubbles.waterfall == False:
+                    at_Pistyll = True
+                    while at_Pistyll:
+                        print("It's so high up here! But you're stuck on one side of the river")
+                        print("You can \"swim\" to the other side for a better view!")
+                        go_swim = input()
+                        if go_swim == "swim":
+                            if Bubbles.swimmer == False:
+                                print("You should probably practice swimming somewhere else first")
                                 at_Pistyll = False
                             else:
-                                print("You need your trunks!")
-                                at_Pistyll = False
-                    else:
-                        print("Not quite")
-                        at_Pistyll = False
+                                if "Trunks" in Bubbles.currently_wearing:
+                                    print("Good thing you've got your trunks on!")
+                                    print("Splash splash")
+                                    print("What a beautiful sight")
+                                    Bubbles.waterfall = True
+                                    at_Pistyll = False
+                                else:
+                                    print("You need your trunks!")
+                                    at_Pistyll = False
+                        else:
+                            print("Not quite")
+                            at_Pistyll = False
+                else:
+                    print("You've already been up here")
                 pass
 
 def wearing():
@@ -452,28 +456,32 @@ Bubbles.currently_wearing.append("Jacket")
 Bubbles.leash = True
 Bubbles.XP = 20
 while doing_stuff:
-    doing = input()
-    if doing == "eat":
-        Bubbles.eat()
-    elif doing == "sleep":
-        Bubbles.sleep()
-    elif doing == "go":
-        going() 
-    elif doing == "explore":
-        explore()
-    elif doing == "wear":
-        wearing()
-    elif doing == "energy":
-        print("You have {}/20 energy".format(Bubbles.energy))
-    elif doing == "where":
-        print("You are currently at {}".format((Bubbles.current_place).name))
-    elif doing == "xp":
-        print("You have {xp}XP".format(xp=Bubbles.XP))
-    elif doing == "items":
-        print(Bubbles.items)
-        print("Type \"wear\" to put on or take off items")
-    elif doing == "help":
-        help_list()
+    if Bubbles.kitchen == True and Bubbles.garden_encounter == True and Bubbles.bouy == True and Bubbles.dog_fight == True and Bubbles.climb == True and Bubbles.waterfall == True and Bubbles.jacket == True:
+        print("That's all for now folks!")
+        doing_stuff = False
+    else:
+        doing = input()
+        if doing == "eat":
+            Bubbles.eat()
+        elif doing == "sleep":
+            Bubbles.sleep()
+        elif doing == "go":
+            going() 
+        elif doing == "explore":
+            explore()
+        elif doing == "wear":
+            wearing()
+        elif doing == "energy":
+            print("You have {}/20 energy".format(Bubbles.energy))
+        elif doing == "where":
+            print("You are currently at {}".format((Bubbles.current_place).name))
+        elif doing == "xp":
+            print("You have {xp}XP".format(xp=Bubbles.XP))
+        elif doing == "items":
+            print(Bubbles.items)
+            print("Type \"wear\" to put on or take off items")
+        elif doing == "help":
+            help_list()
 
         
 #add text to returns
@@ -483,3 +491,4 @@ while doing_stuff:
 #have to go back in van to get home still
 #add no_energy for go
 #double check the XP for fighting at widemouth is realistic
+#add winner text

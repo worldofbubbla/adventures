@@ -209,27 +209,33 @@ def explore():
                     if go_garden == "patio":
                         patio = True
                         while patio:
-                            print("There's two cats up here! Do you want to \"fight\" or \"sniff\" their bum?")
-                            fight_sniff = input()
-                            if fight_sniff == "fight":
-                                Bubbles.energy += -6
-                                Bubbles.XP += +5
-                                print("That was hard! You've asserted your dominance and gained XP!")
-                                print("You have {xp}XP".format(xp=Bubbles.XP))
-                                print("You have {}/20 energy".format(Bubbles.energy))
-                                patio = False
-                                at_Garden = False
-                            elif fight_sniff == "sniff":
-                                Bubbles.energy += -2
-                                Bubbles.XP += +5
-                                print("Ummm")
-                                print("I guess it worked? You've made two friends and gained XP!")
-                                print("You have {xp}XP".format(xp=Bubbles.XP))
-                                print("You have {}/20 energy".format(Bubbles.energy))
-                                patio = False
-                                at_Garden = False
+                            if Bubbles.garden_encounter == False:
+                                print("There's two cats up here! Do you want to \"fight\" or \"sniff\" their bum?")
+                                fight_sniff = input()
+                                if fight_sniff == "fight":
+                                    Bubbles.energy += -6
+                                    Bubbles.XP += +5
+                                    print("That was hard! You've asserted your dominance and gained XP!")
+                                    print("You have {xp}XP".format(xp=Bubbles.XP))
+                                    print("You have {}/20 energy".format(Bubbles.energy))
+                                    Bubbles.garden_encounter = True
+                                    patio = False
+                                    at_Garden = False
+                                elif fight_sniff == "sniff":
+                                    Bubbles.energy += -2
+                                    Bubbles.XP += +5
+                                    print("Ummm")
+                                    print("I guess it worked? You've made two friends and gained XP!")
+                                    print("You have {xp}XP".format(xp=Bubbles.XP))
+                                    print("You have {}/20 energy".format(Bubbles.energy))
+                                    Bubbles.garden_encounter = True
+                                    patio = False
+                                    at_Garden = False
+                                else:
+                                    print("Not quite")
                             else:
-                                print("Not quite")
+                                print("Nothing new here")
+                                patio = False
                         at_Garden = False
             if Bubbles.current_place == Van:
                 in_Van = True

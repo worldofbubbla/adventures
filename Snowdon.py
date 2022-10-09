@@ -157,8 +157,11 @@ def going():
                                 else:
                                     print("You need to get there somehow!")
                             else:
-                                print("Road trip...")
-                                (globals()[go_where]).go_to()
+                                if go_where == "Van":
+                                    (globals()[go_where]).go_to()
+                                else:
+                                    print("Road trip...")
+                                    (globals()[go_where]).go_to()
                 else:
                     (globals()[go_where]).go_to()
             elif go_where == "stay":

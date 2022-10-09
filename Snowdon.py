@@ -101,6 +101,14 @@ class Cat:
         self.leash = False
         self.swimmer = False
         self.trunks_wet = False
+        #for not repeating tasks
+        self.kitchen = False
+        self.garden_encounter = False
+        self.jacket = False
+        self.climb = False
+        self.bouy = False
+        self.waterfall = False
+        self.dog_fight = False
         print("Welcome to the World {}!".format(self.name))
     def __repr__(self):
         return "You are {name} the Cat, you have {energy} energy and and {XP}XP".format(name=self.name, energy=self.energy, XP=self.XP)
@@ -180,12 +188,15 @@ def explore():
                     elif go_home == "bathroom":
                         print("My eyes! They sting! Let's try somewhere else")
                     elif go_home == "kitchen":
-                        print("Food! and a leash! Nice.")
-                        Bubbles.eat()
-                        Bubbles.items.append("Leash")
-                        print("Let's try the Garden again")
-                        #Bubbles.leash = True
-                        at_Home= False
+                        if Bubbles.kitchen == False:
+                            print("Food! and a leash! Nice.")
+                            Bubbles.eat()
+                            Bubbles.items.append("Leash")
+                            print("Let's try the Garden again")
+                            Bubbles.kitchen = True
+                            at_Home= False
+                        else:
+                            print("Nothing new here")
                     else: 
                         print("Not quite")
             if Bubbles.current_place == Garden:
@@ -427,8 +438,6 @@ while doing_stuff:
         explore()
     elif doing == "wear":
         wearing()
-
-
     elif doing == "energy":
         print("You have {}/20 energy".format(Bubbles.energy))
     elif doing == "where":

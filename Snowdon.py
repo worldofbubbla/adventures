@@ -1,43 +1,46 @@
 import time
 #Intro message
-#print("""
-#
-#░██╗░░░░░░░██╗░█████╗░██████╗░██╗░░░░░██████╗░
-#░██║░░██╗░░██║██╔══██╗██╔══██╗██║░░░░░██╔══██╗
-#░╚██╗████╗██╔╝██║░░██║██████╔╝██║░░░░░██║░░██║
-#░░████╔═████║░██║░░██║██╔══██╗██║░░░░░██║░░██║
-#░░╚██╔╝░╚██╔╝░╚█████╔╝██║░░██║███████╗██████╔╝
-#░░░╚═╝░░░╚═╝░░░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░
-#""")
-#time.sleep(1)
-#print("""
-#░█████╗░███████╗
-#██╔══██╗██╔════╝
-#██║░░██║█████╗░░
-#██║░░██║██╔══╝░░
-#╚█████╔╝██║░░░░░
-#░╚════╝░╚═╝░░░░░
-#""")
-#time.sleep(1)
-#print("""
-#██████╗░██╗░░░██╗██████╗░██████╗░██╗░░░░░███████╗░██████╗
-#██╔══██╗██║░░░██║██╔══██╗██╔══██╗██║░░░░░██╔════╝██╔════╝
-#██████╦╝██║░░░██║██████╦╝██████╦╝██║░░░░░█████╗░░╚█████╗░
-#██╔══██╗██║░░░██║██╔══██╗██╔══██╗██║░░░░░██╔══╝░░░╚═══██╗
-#██████╦╝╚██████╔╝██████╦╝██████╦╝███████╗███████╗██████╔╝
-#╚═════╝░░╚═════╝░╚═════╝░╚═════╝░╚══════╝╚══════╝╚═════╝░""")
-#time.sleep(1)
+print("""
+
+░██╗░░░░░░░██╗░█████╗░██████╗░██╗░░░░░██████╗░
+░██║░░██╗░░██║██╔══██╗██╔══██╗██║░░░░░██╔══██╗
+░╚██╗████╗██╔╝██║░░██║██████╔╝██║░░░░░██║░░██║
+░░████╔═████║░██║░░██║██╔══██╗██║░░░░░██║░░██║
+░░╚██╔╝░╚██╔╝░╚█████╔╝██║░░██║███████╗██████╔╝
+░░░╚═╝░░░╚═╝░░░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░
+""")
+time.sleep(1)
+print("""
+░█████╗░███████╗
+██╔══██╗██╔════╝
+██║░░██║█████╗░░
+██║░░██║██╔══╝░░
+╚█████╔╝██║░░░░░
+░╚════╝░╚═╝░░░░░
+""")
+time.sleep(1)
+print("""
+██████╗░██╗░░░██╗██████╗░██████╗░██╗░░░░░███████╗░██████╗
+██╔══██╗██║░░░██║██╔══██╗██╔══██╗██║░░░░░██╔════╝██╔════╝
+██████╦╝██║░░░██║██████╦╝██████╦╝██║░░░░░█████╗░░╚█████╗░
+██╔══██╗██║░░░██║██╔══██╗██╔══██╗██║░░░░░██╔══╝░░░╚═══██╗
+██████╦╝╚██████╔╝██████╦╝██████╦╝███████╗███████╗██████╔╝
+╚═════╝░░╚═════╝░╚═════╝░╚═════╝░╚══════╝╚══════╝╚═════╝░""")
+time.sleep(1)
 #Place class
 def help_list():
     print("""
-    ALL INSTRUCTIONS HERE
-    eat - 
-    sleep -
-    go -
-    energy - 
-    where - 
-    xp -
-    items - 
+    INSTRUCTIONS
+    eat - gain 2 energy points when you have something to eat. this can be done anywhere.
+    sleep - restore full energy when you sleep. only possible in safe environments.
+    explore - explore the area
+    go - where are you going to go?
+    energy - see current energy levels
+    where - see current location
+    xp - see current XP
+    items - see current items you own
+    wear - put on/take off items
+    wearing - see what you are currently wearing
     """)
 
 class Place:
@@ -93,7 +96,6 @@ class Cat:
         self.name = name
         self.energy = 10
         self.XP = 2
-        self.max_XP: 50
         self.items = []
         self.currently_wearing = [] 
         self.gender = gender
@@ -140,7 +142,7 @@ class Cat:
         else:
             Bubbles.miles += 1
             Bubbles.energy += -2
-            print("You have walked {}= out of 9 miles".format(Bubbles.miles))
+            print("You have walked {} out of 9 miles".format(Bubbles.miles))
 
 def going():
             print("Go where?")
@@ -181,7 +183,7 @@ def going():
                 print("Try again. Check places with \"locations\" or \"stay\" where you are.")
 
 def explore():
-            if Bubbles.current_place == Home:
+         if Bubbles.current_place == Home:
                 at_Home= True
                 while at_Home:
                     print("Do you want to look in the \"bedroom\", \"bathroom\", or \"kitchen\"?")
@@ -202,7 +204,7 @@ def explore():
                             print("Nothing new here")
                     else: 
                         print("Not quite")
-            if Bubbles.current_place == Garden:
+         if Bubbles.current_place == Garden:
                 at_Garden = True
                 while at_Garden:
                     print("Do you want to look in the \"grass\" or on the \"patio\"?")
@@ -240,7 +242,7 @@ def explore():
                                 print("Nothing new here")
                                 patio = False
                         at_Garden = False
-            if Bubbles.current_place == Van:
+         if Bubbles.current_place == Van:
                 if Bubbles.jacket == False:
                     in_Van = True
                     while in_Van:
@@ -251,7 +253,7 @@ def explore():
                         in_Van = False
                 else:
                     print("Nothing new here")
-            if Bubbles.current_place == Snowdon:
+         if Bubbles.current_place == Snowdon:
                 if Bubbles.climb == False:
                     at_Snowdon = True
                     while at_Snowdon:
@@ -276,11 +278,13 @@ def explore():
                                     Bubbles.eat()
                                 else:
                                     print("Not quite")
+                                    at_Snowdon = False
                         else:
                             print("You'll need to be wearing something warm to go up there!")
+                            at_Snowdon = False
                 else:
                     print("You've aleady climbed this")
-            if Bubbles.current_place == Bournemouth:
+         if Bubbles.current_place == Bournemouth:
                 if Bubbles.bouy == False:
                     at_Bournemouth = True
                     while at_Bournemouth:
@@ -310,7 +314,7 @@ def explore():
                 else:
                     print("You've already swum to the bouy")
                     at_Bournemouth = False
-            if Bubbles.current_place == Widemouth:
+         if Bubbles.current_place == Widemouth:
                 at_Widemouth = True
                 while at_Widemouth:
                     if Bubbles.beach_count < 2:
@@ -332,10 +336,11 @@ def explore():
                                     at_Widemouth = False
                             else:
                                 print("Not enough XP to fight it, you run back in the bag")
+                                at_Widemouth = False
                         else:
                             print("You're already the Lion King")
                             at_Widemouth = False
-            if Bubbles.current_place == Pistyll:
+         if Bubbles.current_place == Pistyll:
                 if Bubbles.waterfall == False:
                     at_Pistyll = True
                     while at_Pistyll:
@@ -404,7 +409,7 @@ while gendering:
         print("Please select from the available options")
 
 print("That car journey home really drained your energy!")
-intro = False
+intro = True
 while intro:
     intro_eat = True
     while intro_eat:
@@ -456,20 +461,22 @@ while intro:
             print("Not quite")
         print("Lets get started")
         print("type \"help\" at any point to get instructions")
+        help_list()
+        print("Try \"explore\" the house?")
         intro = False
 doing_stuff = True
 #for sake of speed:
 #Bubbles = Cat("Bubbles", "M", Home)
-Bubbles.items.append("Leash")
-Bubbles.items.append("Jacket")
-Bubbles.items.append("Trunks")
-Bubbles.currently_wearing.append("Leash")
-Bubbles.currently_wearing.append("Jacket")
-Bubbles.leash = True
-Bubbles.XP = 20
+#Bubbles.items.append("Leash")
+#Bubbles.items.append("Jacket")
+#Bubbles.items.append("Trunks")
+#Bubbles.currently_wearing.append("Leash")
+#Bubbles.currently_wearing.append("Jacket")
+#Bubbles.leash = True
+#Bubbles.XP = 20
 while doing_stuff:
     if Bubbles.kitchen == True and Bubbles.garden_encounter == True and Bubbles.bouy == True and Bubbles.dog_fight == True and Bubbles.climb == True and Bubbles.waterfall == True and Bubbles.jacket == True:
-        print("That's all for now folks!")
+        print("Well done! You've completed your first year of life! Feel free to go make some bread now :)")
         doing_stuff = False
     else:
         doing = input()
@@ -492,11 +499,7 @@ while doing_stuff:
         elif doing == "items":
             print(Bubbles.items)
             print("Type \"wear\" to put on or take off items")
+        elif doing == "wearing":
+            print(Bubbles.currently_wearing)
         elif doing == "help":
             help_list()
-
-        
-#double check the XP for fighting at widemouth is realistic
-#add winner text
-#help list better
-#clean up intro

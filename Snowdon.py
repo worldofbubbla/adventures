@@ -278,30 +278,34 @@ def explore():
                 else:
                     print("You've aleady climbed this")
             if Bubbles.current_place == Bournemouth:
-                at_Bournemouth = True
-                while at_Bournemouth:
-                    if Bubbles.beach_count < 2:
-                        print("It's your first time at the beach! The sand is too scary to leave the bag!")
-                        at_Bournemouth = False
-                    else:
-                        if "Trunks" in Bubbles.currently_wearing:
-                            print("The water looks lovely! Lets go for a \"swim\"")
-                            swim = input()
-                            if swim == "swim" and Bubbles.energy >= 5:
-                                print("You're a better swimmer than your ma! You reached the bouy!")
-                                Bubbles.energy += -5
-                                Bubbles.XP += 5
-                                Bubbles.swimmer = True
-                                Bubbles.trunks_wet = True
-                                print("You have {}/20 energy".format(Bubbles.energy))
-                                print("You have {xp}XP".format(xp=Bubbles.XP))
-                                at_Bournemouth = False
-                            elif swim == "swim" and Bubbles.energy < 5:
-                                print("You won't be able to get far with {}/20 energy".format(Bubbles.energy))
-                                at_Bournemouth = False
-                        else:
-                            print("You can't swim without a pair of trunks!")
+                if Bubbles.bouy == False:
+                    at_Bournemouth = True
+                    while at_Bournemouth:
+                        if Bubbles.beach_count < 2:
+                            print("It's your first time at the beach! The sand is too scary to leave the bag!")
                             at_Bournemouth = False
+                        else:
+                            if "Trunks" in Bubbles.currently_wearing:
+                                print("The water looks lovely! Lets go for a \"swim\"")
+                                swim = input()
+                                if swim == "swim" and Bubbles.energy >= 5:
+                                    print("You're a better swimmer than your ma! You reached the bouy!")
+                                    Bubbles.energy += -5
+                                    Bubbles.XP += 5
+                                    Bubbles.swimmer = True
+                                    Bubbles.trunks_wet = True
+                                    Bubbles.bouy = True
+                                    print("You have {}/20 energy".format(Bubbles.energy))
+                                    print("You have {xp}XP".format(xp=Bubbles.XP))
+                                    at_Bournemouth = False
+                                elif swim == "swim" and Bubbles.energy < 5:
+                                    print("You won't be able to get far with {}/20 energy".format(Bubbles.energy))
+                                    at_Bournemouth = False
+                            else:
+                                print("You can't swim without a pair of trunks!")
+                                at_Bournemouth = False
+                else:
+                    print("You've already swum to the bouy")
                     at_Bournemouth = False
             if Bubbles.current_place == Widemouth:
                 at_Widemouth = True

@@ -238,37 +238,45 @@ def explore():
                                 patio = False
                         at_Garden = False
             if Bubbles.current_place == Van:
-                in_Van = True
-                while in_Van:
-                    print("They don't like you looking around here too much!")
-                    print("*Takes da's 1000 down himilayan North Face jacket*")
-                    Bubbles.items.append("Jacket")
-                    in_Van = False
+                if Bubbles.jacket == False:
+                    in_Van = True
+                    while in_Van:
+                        print("They don't like you looking around here too much!")
+                        print("*Takes da's 1000 down himilayan North Face jacket*")
+                        Bubbles.items.append("Jacket")
+                        Bubbles.jacket = True
+                        in_Van = False
+                else:
+                    print("Nothing new here")
             if Bubbles.current_place == Snowdon:
-                at_Snowdon = True
-                while at_Snowdon:
-                    print("Wow that's a 9 mile \"walk\"")
-                    if "Jacket" in Bubbles.currently_wearing:
-                        print("Good thing you are wearing your jacket! Lets get going")
-                        print("Lets get \"walk\"ing, or \"eat\" something")
-                        while Bubbles.miles <= 9:
-                            start_walking = input()
-                            if start_walking == "walk":
-                                if Bubbles.miles < 9:
-                                    Bubbles.walk()
-                                if Bubbles.miles == 9:
-                                    print("Wow! What a view!!")
-                                    print("Someone left their... swimming trunks up here??")
-                                    Bubbles.items.append("Trunks")
-                                    Bubbles.XP += 5
-                                    print("You have {xp}XP".format(xp=Bubbles.XP))
-                                    at_Snowdon = False
-                            elif start_walking == "eat":
-                                Bubbles.eat()
-                            else:
-                                print("Not quite")
-                    else:
-                        print("You'll need to be wearing something warm to go up there!")
+                if Bubbles.climb == False:
+                    at_Snowdon = True
+                    while at_Snowdon:
+                        print("Wow that's a 9 mile \"walk\"")
+                        if "Jacket" in Bubbles.currently_wearing:
+                            print("Good thing you are wearing your jacket! Lets get going")
+                            print("Lets get \"walk\"ing, or \"eat\" something")
+                            while Bubbles.miles < 9:
+                                start_walking = input()
+                                if start_walking == "walk":
+                                    if Bubbles.miles < 9:
+                                        Bubbles.walk()
+                                    if Bubbles.miles == 9:
+                                        print("Wow! What a view!!")
+                                        print("Someone left their... swimming trunks up here??")
+                                        Bubbles.items.append("Trunks")
+                                        Bubbles.XP += 5
+                                        print("You have {xp}XP".format(xp=Bubbles.XP))
+                                        Bubbles.climb = True
+                                        at_Snowdon = False
+                                elif start_walking == "eat":
+                                    Bubbles.eat()
+                                else:
+                                    print("Not quite")
+                        else:
+                            print("You'll need to be wearing something warm to go up there!")
+                else:
+                    print("You've aleady climbed this")
             if Bubbles.current_place == Bournemouth:
                 at_Bournemouth = True
                 while at_Bournemouth:

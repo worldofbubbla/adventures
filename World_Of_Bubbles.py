@@ -190,8 +190,10 @@ def explore():
                     go_home = input()
                     if go_home == "bedroom":
                         print("They've hidden the toys behind the TV! No fair.")
+                        at_Home = False
                     elif go_home == "bathroom":
                         print("My eyes! They sting! Let's try somewhere else")
+                        at_Home = False
                     elif go_home == "kitchen":
                         if Bubbles.kitchen == False:
                             print("Food! and a leash! Nice.")
@@ -239,6 +241,7 @@ def explore():
                                     at_Garden = False
                                 else:
                                     print("Not quite")
+                                    at_Garden = False
                             else:
                                 print("Nothing new here")
                                 patio = False

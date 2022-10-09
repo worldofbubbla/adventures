@@ -41,6 +41,7 @@ def help_list():
     items - see current items you own
     wear - put on/take off items
     wearing - see what you are currently wearing
+    locations - see a list of locations
     """)
 
 class Place:
@@ -494,6 +495,8 @@ while doing_stuff:
             explore()
         elif doing == "wear":
             wearing()
+        elif doing == "locations":
+            print(Place.locations)
         elif doing == "energy":
             print("You have {}/20 energy".format(Bubbles.energy))
         elif doing == "where":

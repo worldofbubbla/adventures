@@ -319,6 +319,33 @@ def explore():
                         print("Not quite")
                         at_Pistyll = False
                 pass
+
+def wearing():
+            print("What item?")
+            what_item = input()
+            if what_item not in Bubbles.items:
+                print("You don't own that!")
+            else:
+                if what_item in Bubbles.currently_wearing:
+                    Bubbles.currently_wearing.remove(what_item)
+                    if what_item == "Leash":
+                        Bubbles.leash = False
+                    if what_item == "Trunks":
+                        Bubbles.trunks_wet = False
+                    else:
+                        pass
+                    print("You've taken it off")
+                else:
+                    if len(Bubbles.currently_wearing) >= 2:
+                        print("You can only wear two items at a time, take something off to put this on")
+                    else:
+                        Bubbles.currently_wearing.append(what_item)
+                        if what_item == "Leash":
+                            Bubbles.leash = True
+                        else:
+                            pass
+                        print("That looks good on you!")
+            wearing = False
 #print("Choose a gender: F or M or Other")
 #gender = input()
 #gender_phrase = {"M":"handsome boy", "F":"pretty girl", "Other":"gorgeous thing"}
@@ -398,35 +425,9 @@ while doing_stuff:
         going() 
     elif doing == "explore":
         explore()
-
     elif doing == "wear":
-        wearing = True
-        while wearing:
-            print("What item?")
-            what_item = input()
-            if what_item not in Bubbles.items:
-                print("You don't own that!")
-            else:
-                if what_item in Bubbles.currently_wearing:
-                    Bubbles.currently_wearing.remove(what_item)
-                    if what_item == "Leash":
-                        Bubbles.leash = False
-                    if what_item == "Trunks":
-                        Bubbles.trunks_wet = False
-                    else:
-                        pass
-                    print("You've taken it off")
-                else:
-                    if len(Bubbles.currently_wearing) >= 2:
-                        print("You can only wear two items at a time, take something off to put this on")
-                    else:
-                        Bubbles.currently_wearing.append(what_item)
-                        if what_item == "Leash":
-                            Bubbles.leash = True
-                        else:
-                            pass
-                        print("That looks good on you!")
-            wearing = False
+        wearing()
+
 
     elif doing == "energy":
         print("You have {}/20 energy".format(Bubbles.energy))

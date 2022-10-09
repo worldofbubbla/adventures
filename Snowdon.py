@@ -314,17 +314,24 @@ def explore():
                         print("It's your first time at the beach! The sand is too scary to leave the bag!")
                         at_Widemouth = False
                     else:
-                        print("You are a lot more confident on the sand this time!")
-                        print("A ratty looking dog runs up to you!")
-                        if Bubbles.XP > 20:
-                            print("Me-ow! You showed him who's boss!")
-                            print("Now \"climb\" on that rock to assert your dominance!")
-                            climb_rock = input()
-                            if climb_rock == "climb":
-                                print("ItS tHe CiRcLe Of LiFe!!")
-                                Bubbles.XP += 5
-                                print(("You have {xp}XP".format(xp=Bubbles.XP)))
-                                at_Widemouth = False
+                        if Bubbles.dog_fight == False:
+                            print("You are a lot more confident on the sand this time!")
+                            print("A ratty looking dog runs up to you!")
+                            if Bubbles.XP > 20:
+                                print("Me-ow! You showed him who's boss!")
+                                print("Now \"climb\" on that rock to assert your dominance!")
+                                climb_rock = input()
+                                if climb_rock == "climb":
+                                    print("ItS tHe CiRcLe Of LiFe!!")
+                                    Bubbles.XP += 5
+                                    print(("You have {xp}XP".format(xp=Bubbles.XP)))
+                                    Bubbles.dog_fight = True
+                                    at_Widemouth = False
+                            else:
+                                print("Not enough XP to fight it, you run back in the bag")
+                        else:
+                            print("You're already the Lion King")
+                            at_Widemouth = False
             if Bubbles.current_place == Pistyll:
                 at_Pistyll = True
                 while at_Pistyll:
